@@ -9,7 +9,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Search, Globe } from "lucide-react";
+import { Search } from "lucide-react";
 import type { UIMessagePart } from "./research-interface";
 
 interface ToolActivityProps {
@@ -21,13 +21,13 @@ export function ToolActivity({ toolParts, isLoading }: ToolActivityProps) {
   return (
     <Card className="p-4">
       <div className="flex items-center gap-2 mb-3">
-        <Globe className="h-4 w-4 text-muted-foreground" />
+        <span className="text-base">🔍</span>
         <h3 className="text-sm font-medium text-muted-foreground">
           Research Activity
         </h3>
         {isLoading && (
-          <Badge variant="secondary" className="animate-pulse">
-            Researching...
+          <Badge variant="secondary" className="animate-pulse bg-primary/10 text-primary">
+            Searching the web...
           </Badge>
         )}
       </div>
@@ -37,7 +37,7 @@ export function ToolActivity({ toolParts, isLoading }: ToolActivityProps) {
           const query = isSearch
             ? part.args?.query
             : part.args?.url;
-          const isComplete = part.state === "result";
+          const isComplete = part.state === "output-available";
           const resultCount =
             isComplete && Array.isArray(part.result)
               ? part.result.length
@@ -47,13 +47,13 @@ export function ToolActivity({ toolParts, isLoading }: ToolActivityProps) {
             <AccordionItem key={index} value={`tool-${index}`}>
               <AccordionTrigger className="text-sm py-2">
                 <div className="flex items-center gap-2">
-                  <Search className="h-3 w-3 shrink-0" />
+                  <Search className="h-3 w-3 shrink-0 text-primary" />
                   <span className="text-left truncate">
                     {isSearch ? "Searched" : "Found similar"}:{" "}
                     &ldquo;{query}&rdquo;
                   </span>
                   {isComplete ? (
-                    <Badge variant="outline" className="ml-2 shrink-0">
+                    <Badge variant="outline" className="ml-2 shrink-0 border-primary/30 text-primary">
                       {resultCount} results
                     </Badge>
                   ) : (

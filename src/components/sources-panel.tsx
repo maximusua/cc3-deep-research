@@ -3,7 +3,6 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { ExternalLink } from "lucide-react";
 
 interface Source {
   title: string;
@@ -25,17 +24,19 @@ export function SourcesPanel({ sources }: SourcesPanelProps) {
   return (
     <Card className="p-4">
       <div className="flex items-center gap-2 mb-3">
-        <ExternalLink className="h-4 w-4 text-muted-foreground" />
+        <span className="text-base">🔗</span>
         <h3 className="text-sm font-medium text-muted-foreground">
-          Sources Referenced
+          Where We Found This
         </h3>
-        <Badge variant="secondary">{uniqueSources.length}</Badge>
+        <Badge variant="secondary" className="bg-primary/10 text-primary">
+          {uniqueSources.length}
+        </Badge>
       </div>
       <Separator className="mb-3" />
       <ul className="space-y-2">
         {uniqueSources.map((source, index) => (
           <li key={index} className="flex items-start gap-2">
-            <Badge variant="outline" className="mt-0.5 shrink-0">
+            <Badge variant="outline" className="mt-0.5 shrink-0 border-primary/30 text-primary">
               {index + 1}
             </Badge>
             <a

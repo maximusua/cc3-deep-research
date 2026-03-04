@@ -28,9 +28,10 @@ export function ResearchInterface() {
 
   const isLoading = status === "submitted" || status === "streaming";
 
-  const handleSubmit = () => {
-    if (!input.trim() || isLoading) return;
-    sendMessage({ text: input });
+  const handleSubmit = (text?: string) => {
+    const query = text || input;
+    if (!query.trim() || isLoading) return;
+    sendMessage({ text: query });
     setInput("");
   };
 
@@ -79,9 +80,11 @@ export function ResearchInterface() {
 
   return (
     <div className="flex flex-col items-center min-h-screen">
-      <header className="w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-10">
+      <header className="w-full border-b bg-gradient-animated sticky top-0 z-10">
         <div className="container flex h-14 items-center justify-between max-w-4xl mx-auto px-4">
-          <h1 className="text-xl font-semibold">Deep Research</h1>
+          <h1 className="text-xl font-bold text-white tracking-tight">
+            BrainBlast
+          </h1>
           <ThemeToggle />
         </div>
       </header>

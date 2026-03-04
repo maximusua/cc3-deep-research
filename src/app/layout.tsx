@@ -14,9 +14,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Deep Research Agent",
+  title: "BrainBlast - Research Made Fun!",
   description:
-    "AI-powered deep research assistant that searches the web and synthesizes comprehensive reports.",
+    "Your AI-powered homework buddy! Ask any question and get easy-to-understand research reports with cool facts.",
 };
 
 export default function RootLayout({
