@@ -52,9 +52,18 @@ page.tsx (server) → ResearchInterface (client, orchestrator)
 - **Exa** (`exa-js`): Singleton in `src/lib/exa.ts`, uses `searchAndContents` and `findSimilarAndContents`
 - **shadcn/ui**: Components in `src/components/ui/`, configured via `components.json` (New York style, neutral base)
 
+## Deployment
+
+- **Platform**: Vercel (auto-deploys from `main` branch on GitHub)
+- **Repo**: `github.com/maximusua/cc3-deep-research`
+- **Live URL**: https://cc3-deep-research.vercel.app/
+- **Framework preset**: Next.js (auto-detected)
+- **Root directory**: `.` (repo root) — files must be at root, not in a subdirectory
+- **Environment variables**: `OPENROUTER_API_KEY` and `EXA_API_KEY` must be set in Vercel project settings
+
 ## Environment Variables
 
-`.env.local` requires:
+`.env.local` requires (for local dev):
 ```
 OPENROUTER_API_KEY=sk-or-v1-...
 EXA_API_KEY=...
