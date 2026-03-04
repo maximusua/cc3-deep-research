@@ -8,6 +8,7 @@ import { ResearchReport } from "./research-report";
 import { ToolActivity } from "./tool-activity";
 import { SourcesPanel } from "./sources-panel";
 import { ThemeToggle } from "./theme-toggle";
+import { Sparkles } from "lucide-react";
 
 // Simplified type for tool parts extracted from message parts
 export interface UIMessagePart {
@@ -28,9 +29,10 @@ export function ResearchInterface() {
 
   const isLoading = status === "submitted" || status === "streaming";
 
-  const handleSubmit = () => {
-    if (!input.trim() || isLoading) return;
-    sendMessage({ text: input });
+  const handleSubmit = (text?: string) => {
+    const query = text || input;
+    if (!query.trim() || isLoading) return;
+    sendMessage({ text: query });
     setInput("");
   };
 
@@ -78,11 +80,23 @@ export function ResearchInterface() {
   const reportText = textParts.join("");
 
   return (
-    <div className="flex flex-col items-center min-h-screen">
-      <header className="w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 sticky top-0 z-10">
+    <div className="flex flex-col items-center min-h-screen relative">
+      {/* Animated gradient mesh background */}
+      <div className="gradient-mesh" />
+      <div className="gradient-orb" />
+
+      <header className="w-full glass sticky top-0 z-10">
         <div className="container flex h-14 items-center justify-between max-w-4xl mx-auto px-4">
-          <h1 className="text-xl font-semibold">Deep Research</h1>
-          <ThemeToggle />
+          <div className="flex items-center gap-2">
+            <Sparkles className="h-5 w-5 text-primary" />
+            <h1 className="text-lg font-bold gradient-text">Deep Research</h1>
+          </div>
+          <div className="flex items-center gap-3">
+            <span className="text-xs text-muted-foreground font-medium px-2 py-1 rounded-full border border-border/50">
+              AI-powered
+            </span>
+            <ThemeToggle />
+          </div>
         </div>
       </header>
 

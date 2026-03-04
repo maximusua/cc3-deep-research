@@ -1,6 +1,5 @@
 "use client";
 
-import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
   Accordion,
@@ -19,16 +18,16 @@ interface ToolActivityProps {
 
 export function ToolActivity({ toolParts, isLoading }: ToolActivityProps) {
   return (
-    <Card className="p-4">
+    <div className="glass rounded-2xl p-4">
       <div className="flex items-center gap-2 mb-3">
-        <Globe className="h-4 w-4 text-muted-foreground" />
-        <h3 className="text-sm font-medium text-muted-foreground">
+        <Globe className="h-4 w-4 text-primary" />
+        <h3 className="text-sm font-semibold text-foreground/80">
           Research Activity
         </h3>
         {isLoading && (
-          <Badge variant="secondary" className="animate-pulse">
-            Researching...
-          </Badge>
+          <span className="text-xs font-medium px-2 py-0.5 rounded-full shimmer text-white">
+            Searching...
+          </span>
         )}
       </div>
       <Accordion type="multiple" className="w-full">
@@ -47,30 +46,32 @@ export function ToolActivity({ toolParts, isLoading }: ToolActivityProps) {
             <AccordionItem key={index} value={`tool-${index}`}>
               <AccordionTrigger className="text-sm py-2">
                 <div className="flex items-center gap-2">
-                  <Search className="h-3 w-3 shrink-0" />
+                  <span className="flex h-5 w-5 items-center justify-center rounded-full badge-gradient text-[10px] font-bold shrink-0">
+                    {index + 1}
+                  </span>
                   <span className="text-left truncate">
                     {isSearch ? "Searched" : "Found similar"}:{" "}
                     &ldquo;{query}&rdquo;
                   </span>
                   {isComplete ? (
-                    <Badge variant="outline" className="ml-2 shrink-0">
+                    <Badge variant="outline" className="ml-2 shrink-0 rounded-full">
                       {resultCount} results
                     </Badge>
                   ) : (
-                    <Skeleton className="h-4 w-16 ml-2 shrink-0" />
+                    <Skeleton className="h-4 w-16 ml-2 shrink-0 rounded-full" />
                   )}
                 </div>
               </AccordionTrigger>
               <AccordionContent>
                 {isComplete && Array.isArray(part.result) ? (
-                  <ul className="space-y-1">
+                  <ul className="space-y-1.5 pl-7">
                     {part.result.map((result: any, i: number) => (
                       <li key={i} className="text-xs text-muted-foreground">
                         <a
                           href={result.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="hover:underline text-primary"
+                          className="hover:text-primary transition-colors"
                         >
                           {result.title}
                         </a>
@@ -78,13 +79,13 @@ export function ToolActivity({ toolParts, isLoading }: ToolActivityProps) {
                     ))}
                   </ul>
                 ) : (
-                  <Skeleton className="h-12 w-full" />
+                  <Skeleton className="h-12 w-full rounded-xl" />
                 )}
               </AccordionContent>
             </AccordionItem>
           );
         })}
       </Accordion>
-    </Card>
+    </div>
   );
 }
